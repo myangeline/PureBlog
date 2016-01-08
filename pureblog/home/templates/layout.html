@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
+    <meta name="description" content="A layout example that shows off a blog page with a list of posts.">
+
+    <title>Blog &ndash; Layout Examples &ndash; Pure</title>
+
+
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+
+
+    <!--[if lte IE 8]>
+
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-old-ie-min.css">
+
+<![endif]-->
+    <!--[if gt IE 8]><!-->
+
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-min.css">
+
+    <!--<![endif]-->
+
+
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="css/lib/blog-old-ie.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='home/css/lib/blog.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='common/css/common.css') }}">
+{#    <link rel="stylesheet" href="{{ url_for('home.static', filename='css/lib/blog.css') }}">#}
+    <!--<![endif]-->
+
+
+</head>
+<body>
+
+
+<div id="layout" class="pure-g">
+    <div class="sidebar pure-u-1 pure-u-md-1-6">
+        <div class="header">
+            <h1 class="brand-title">PureBlog</h1>
+            <h3 class="brand-tagline">让coding像呼吸一样自然</h3>
+        </div>
+        <div class="pure-menu custom-restricted-width">
+            <span class="pure-menu-heading">Yahoo Sites</span>
+
+            <ul class="pure-menu-list">
+                <li class="pure-menu-item"><a href="#" class="pure-menu-link">Flickr</a></li>
+                <li class="pure-menu-item"><a href="#" class="pure-menu-link">Messenger</a></li>
+                <li class="pure-menu-item"><a href="#" class="pure-menu-link">Sports</a></li>
+                <li class="pure-menu-item"><a href="#" class="pure-menu-link">Finance</a></li>
+                <li class="pure-menu-heading">More Sites</li>
+                <li class="pure-menu-item"><a href="#" class="pure-menu-link">Games</a></li>
+                <li class="pure-menu-item"><a href="#" class="pure-menu-link">News</a></li>
+                <li class="pure-menu-item"><a href="#" class="pure-menu-link">OMG!</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="content pure-u-1 pure-u-md-3-4">
+
+    </div>
+</div>
+
+
+</body>
+</html>
