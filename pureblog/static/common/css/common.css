@@ -1,3 +1,40 @@
 .header{
     margin: 2em 2em 0;
 }
+
+.pure-menu{
+    text-align: right;
+    /*text-align: center;*/
+    margin-top: 2em;
+}
+
+.pure-menu-item a{
+    text-decoration: none;
+    padding-right: 2em;
+}
+
+.pure-menu-heading{
+    color: white;
+    font-weight: 600;
+    padding-right: 2em;
+}
+
+.pure-menu-link {
+    color: rgb(176, 202, 219);
+}
+
+.footer {
+    font-size: 87.5%;
+    border-top: 1px solid #eee;
+    margin-top: 3.4286em;
+    padding: 1.1429em;
+    background: rgb(250, 250, 250);
+    margin-left: 20%;
+    width: 100%;
+}
+
+@media (min-width: 48em) {
+    .content {
+        margin-left: 20%;
+    }
+}
