@@ -1,3 +1,4 @@
+pymongo
 wtforms
 Flask==0.10.1
 itsdangerous==0.24

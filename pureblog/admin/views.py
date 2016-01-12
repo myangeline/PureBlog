@@ -27,7 +27,7 @@ def login():
         if form.validate_on_submit():
             user = mongodb.get_user(form.username.data)
             if user:
-                if user['pwd'] == md5(form.password.data):
+                if user['password'] == md5(form.password.data):
                     return jsonify(ok('/admin/'))
                 else:
                     return jsonify(error(30001))
@@ -44,6 +44,11 @@ def login():
 def register():
     form = RegisterForm(request.form)
     if form.validate_on_submit():
-        return redirect('admin')
+        user = mongodb.get_user(form.username.data)
+        if user:
+            return jsonify(error(30006))
+        mongodb.add_user(form.fullname.data, form.email.data, form.address.data,
+                         form.username.data, md5(form.password.data))
+        return jsonify(ok('/admin/'))
     else:
         return jsonify(error(30004))
