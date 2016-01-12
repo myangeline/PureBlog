@@ -1,6 +1,9 @@
-var Login = function() {
+/**
+ * Created by sunshine on 2016/1/12.
+ */
 
-    var handleLogin = function() {
+var Login = function () {
+    var handleLogin = function () {
 
         $('.login-form').validate({
             errorElement: 'span', //default input error message container
@@ -18,122 +21,74 @@ var Login = function() {
                 }
             },
 
-            messages: {
-                username: {
-                    required: "用户名不可为空."
-                },
-                password: {
-                    required: "密码不可为空."
-                }
-            },
-
-            invalidHandler: function(event, validator) { //display error alert on form submit   
+            invalidHandler: function (event, validator) {
+                $('.login-error').text("请输入用户名和密码.");
                 $('.alert-danger', $('.login-form')).show();
             },
 
-            highlight: function(element) { // hightlight error inputs
-                $(element)
-                    .closest('.form-group').addClass('has-error'); // set error class to the control group
+            highlight: function (element) {
+                $(element).closest('.form-group').addClass('has-error');
             },
 
-            success: function(label) {
+            success: function (label) {
                 label.closest('.form-group').removeClass('has-error');
                 label.remove();
-                console.log('ok...')
             },
 
-            errorPlacement: function(error, element) {
+            errorPlacement: function (error, element) {
                 error.insertAfter(element.closest('.input-icon'));
+            },
+            submitHandler: function (form) {
+                $.post('/admin/login', $(form).serializeArray(), function (data) {
+                    if(data.code === 0){
+                        location.href = data.data;
+                    }else{
+                        $('.login-error').text(data.error);
+                        $('.alert-danger', $('.login-form')).show();
+                    }
+                }, 'json');
             }
-
-            /*submitHandler: function(form) {
-                form.submit(); // form validation success, call ajax form submit
-            }*/
         });
 
-        /*$('.login-form input').keypress(function(e) {
+        $('.login-form input').keypress(function (e) {
             if (e.which == 13) {
                 if ($('.login-form').validate().form()) {
                     $('.login-form').submit(); //form validation success, call ajax form submit
                 }
                 return false;
             }
-        });*/
-
+        });
     };
 
-    var handleForgetPassword = function() {
-        $('.forget-form').validate({
-            errorElement: 'span', //default input error message container
-            errorClass: 'help-block', // default input error message class
-            focusInvalid: false, // do not focus the last invalid input
-            ignore: "",
-            rules: {
-                email: {
-                    required: true,
-                    email: true
-                }
-            },
+    var handleForgetPassword = function () {
+        /*$('.forget-form input').keypress(function(e) {
+         if (e.which == 13) {
+         if ($('.forget-form').validate().form()) {
+         $('.forget-form').submit();
+         }
+         return false;
+         }
+         });*/
 
-            messages: {
-                email: {
-                    required: "Email不可为空."
-                }
-            },
-
-            invalidHandler: function(event, validator) { //display error alert on form submit   
-
-            },
-
-            highlight: function(element) { // hightlight error inputs
-                $(element)
-                    .closest('.form-group').addClass('has-error'); // set error class to the control group
-            },
-
-            success: function(label) {
-                label.closest('.form-group').removeClass('has-error');
-                label.remove();
-            },
-
-            errorPlacement: function(error, element) {
-                error.insertAfter(element.closest('.input-icon'));
-            },
-
-            submitHandler: function(form) {
-                form.submit();
-            }
-        });
-
-        $('.forget-form input').keypress(function(e) {
-            if (e.which == 13) {
-                if ($('.forget-form').validate().form()) {
-                    $('.forget-form').submit();
-                }
-                return false;
-            }
-        });
-
-        jQuery('#forget-password').click(function() {
+        jQuery('#forget-password').click(function () {
             jQuery('.login-form').hide();
             jQuery('.forget-form').show();
         });
 
-        jQuery('#back-btn').click(function() {
+        jQuery('#back-btn').click(function () {
             jQuery('.login-form').show();
             jQuery('.forget-form').hide();
         });
 
     };
 
-    var handleRegister = function() {
-
+    var handleRegister = function () {
         $('.register-form').validate({
             errorElement: 'span', //default input error message container
             errorClass: 'help-block', // default input error message class
             focusInvalid: false, // do not focus the last invalid input
             ignore: "",
             rules: {
-
                 fullname: {
                     required: true
                 },
@@ -142,12 +97,6 @@ var Login = function() {
                     email: true
                 },
                 address: {
-                    required: true
-                },
-                city: {
-                    required: true
-                },
-                country: {
                     required: true
                 },
 
@@ -170,12 +119,29 @@ var Login = function() {
                 fullname:{
                     required: "姓名不可为空."
                 },
+                email:{
+                    required: "Email不可为空",
+                    email: 'Email地址格式错误'
+                },
+                address:{
+                    required: "地址不可为空"
+                },
+                username:{
+                    required: "用户名不可为空"
+                },
+                password:{
+                    required: "密码不可为空"
+                },
+                rpassword:{
+                    required: "密码不可为空",
+                    equalTo: "两次密码不一致"
+                },
                 tnc: {
                     required: "需要先同意协议."
                 }
             },
 
-            invalidHandler: function(event, validator) { //display error alert on form submit   
+            invalidHandler: function(event, validator) { //display error alert on form submit
 
             },
 
@@ -190,7 +156,7 @@ var Login = function() {
             },
 
             errorPlacement: function(error, element) {
-                if (element.attr("name") == "tnc") { // insert checkbox errors after the container                  
+                if (element.attr("name") == "tnc") { // insert checkbox errors after the container
                     error.insertAfter($('#register_tnc_error'));
                 } else if (element.closest('.input-icon').size() === 1) {
                     error.insertAfter(element.closest('.input-icon'));
@@ -200,7 +166,15 @@ var Login = function() {
             },
 
             submitHandler: function(form) {
-                form.submit();
+                $('#register-submit-btn').addClass('disabled');
+                $.post('/admin/register', $(form).serializeArray(), function (data) {
+                    $('#register-submit-btn').removeClass('disabled');
+                    if(data.code === 0){
+                        location.href = data.data;
+                    }else{
+
+                    }
+                }, 'json');
             }
         });
 
@@ -225,15 +199,10 @@ var Login = function() {
     };
 
     return {
-        //main function to initiate the module
-        init: function() {
-
+        init: function () {
             handleLogin();
             handleForgetPassword();
             handleRegister();
-
         }
-
     };
-
 }();

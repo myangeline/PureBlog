@@ -8,5 +8,5 @@ HOST = '121.42.61.126'
 PORT = 27017
 USERNAME = 'root'
 PASSWORD = 'jin@ll1314'
-DBNAME = 'db_xiaoxiaoluomu'
+DBNAME = 'db_pureblog'
 SOURCE = 'admin'
