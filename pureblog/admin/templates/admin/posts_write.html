@@ -1,0 +1,409 @@
+{% extends 'admin/layout.html' %}
+{% block style %}
+{% endblock %}
+
+{% block page_title %}文章写作{% endblock %}
+
+{% block page_title_detail %}新建文章{% endblock %}
+
+{% block bread_second %}
+    <a href="#">博客管理</a>
+    <i class="fa fa-angle-right"></i>
+{% endblock %}
+
+{% block bread_third %}
+    <a href="#">文章创作</a>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="portlet box blue-hoki" id="form_wizard_1">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-gift"></i> 文章写作 - <span class="step-title">
+								 1 / 2 </span>
+                    </div>
+                </div>
+                <div class="portlet-body form">
+                    <form action="#" class="form-horizontal" id="submit_form" method="POST" novalidate="novalidate">
+                        <div class="form-wizard">
+                            <div class="form-body">
+                                <ul class="nav nav-pills nav-justified steps">
+                                    <li class="active">
+                                        <a href="#tab1" data-toggle="tab" class="step" aria-expanded="true">
+                                            <span class="number"> 1 </span>
+                                            <span class="desc">
+                                            <i class="fa fa-check"></i> 基本信息 </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#tab2" data-toggle="tab" class="step">
+                                            <span class="number">2 </span>
+                                            <span class="desc">
+                                            <i class="fa fa-check"></i> 写作文章 </span>
+                                        </a>
+                                    </li>
+
+                                </ul>
+                                <div id="bar" class="progress progress-striped" role="progressbar">
+                                    <div class="progress-bar progress-bar-success" style="width: 50%;"></div>
+                                </div>
+                                <div class="tab-content">
+                                    <div class="alert alert-danger display-none">
+                                        <button class="close" data-dismiss="alert"></button>
+                                        填写信息有错误，请检查修改后继续
+                                    </div>
+                                    <div class="alert alert-success display-none">
+                                        <button class="close" data-dismiss="alert"></button>
+                                        信息验证通过
+                                    </div>
+                                    <div class="tab-pane active" id="tab1">
+                                        <h3 class="block">请填写文章基本信息</h3>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">
+                                                标题<span class="required" aria-required="true">* </span>
+                                            </label>
+                                            <div class="col-md-5">
+                                                <input type="text" class="form-control" name="title" placeholder="文章标题">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">摘要
+                                                <span class="required" aria-required="true">* </span>
+                                            </label>
+                                            <div class="col-md-5">
+                                                <textarea name="summary" id="" cols="30" rows="5" class="form-control"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">类别</label>
+                                            <div class="col-md-5">
+                                                <select class="form-control input-xlarge select2me" data-placeholder="Select...">
+                                                    <option value="AL">Alabama</option>
+                                                    <option value="WY">Wyoming</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Email <span class="required"
+                                                                                              aria-required="true">
+													* </span>
+                                            </label>
+                                            <div class="col-md-4">
+                                                <input type="text" class="form-control" name="email">
+														<span class="help-block">
+														Provide your email address </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="tab2">
+                                        <h3 class="block">Provide your profile details</h3>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Fullname <span class="required"
+                                                                                                 aria-required="true">
+													* </span>
+                                            </label>
+                                            <div class="col-md-4">
+                                                <input type="text" class="form-control" name="fullname">
+														<span class="help-block">
+														Provide your fullname </span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Phone Number <span class="required"
+                                                                                                     aria-required="true">
+													* </span>
+                                            </label>
+                                            <div class="col-md-4">
+                                                <input type="text" class="form-control" name="phone">
+														<span class="help-block">
+														Provide your phone number </span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Gender <span class="required"
+                                                                                               aria-required="true">
+													* </span>
+                                            </label>
+                                            <div class="col-md-4">
+                                                <div class="radio-list">
+                                                    <label>
+                                                        <div class="radio"><span><input type="radio" name="gender"
+                                                                                        value="M"
+                                                                                        data-title="Male"></span></div>
+                                                        Male </label>
+                                                    <label>
+                                                        <div class="radio"><span><input type="radio" name="gender"
+                                                                                        value="F"
+                                                                                        data-title="Female"></span>
+                                                        </div>
+                                                        Female </label>
+                                                </div>
+                                                <div id="form_gender_error">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Address <span class="required"
+                                                                                                aria-required="true">
+													* </span>
+                                            </label>
+                                            <div class="col-md-4">
+                                                <input type="text" class="form-control" name="address">
+														<span class="help-block">
+														Provide your street address </span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">City/Town <span class="required"
+                                                                                                  aria-required="true">
+													* </span>
+                                            </label>
+                                            <div class="col-md-4">
+                                                <input type="text" class="form-control" name="city">
+														<span class="help-block">
+														Provide your city or town </span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Country</label>
+                                            <div class="col-md-4">
+                                                <div class="select2-container form-control" id="s2id_country_list"><a
+                                                        href="javascript:void(0)" class="select2-choice select2-default"
+                                                        tabindex="-1"> <span class="select2-chosen"
+                                                                             id="select2-chosen-1">Select</span><abbr
+                                                        class="select2-search-choice-close"></abbr> <span
+                                                        class="select2-arrow" role="presentation"><b
+                                                        role="presentation"></b></span></a><label for="s2id_autogen1"
+                                                                                                  class="select2-offscreen"></label><input
+                                                        class="select2-focusser select2-offscreen" type="text"
+                                                        aria-haspopup="true" role="button"
+                                                        aria-labelledby="select2-chosen-1" id="s2id_autogen1">
+                                                    <div class="select2-drop select2-display-none select2-with-searchbox">
+                                                        <div class="select2-search"><label for="s2id_autogen1_search"
+                                                                                           class="select2-offscreen"></label>
+                                                            <input type="text" autocomplete="off" autocorrect="off"
+                                                                   autocapitalize="off" spellcheck="false"
+                                                                   class="select2-input" role="combobox"
+                                                                   aria-expanded="true" aria-autocomplete="list"
+                                                                   aria-owns="select2-results-1"
+                                                                   id="s2id_autogen1_search" placeholder=""></div>
+                                                        <ul class="select2-results" role="listbox"
+                                                            id="select2-results-1"></ul>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Remarks</label>
+                                            <div class="col-md-4">
+                                                <textarea class="form-control" rows="3" name="remarks"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="tab3">
+                                        <h3 class="block">Provide your billing and credit card details</h3>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Card Holder Name <span
+                                                    class="required" aria-required="true">
+													* </span>
+                                            </label>
+                                            <div class="col-md-4">
+                                                <input type="text" class="form-control" name="card_name">
+														<span class="help-block">
+														</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Card Number <span class="required"
+                                                                                                    aria-required="true">
+													* </span>
+                                            </label>
+                                            <div class="col-md-4">
+                                                <input type="text" class="form-control" name="card_number">
+														<span class="help-block">
+														</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">CVC <span class="required"
+                                                                                            aria-required="true">
+													* </span>
+                                            </label>
+                                            <div class="col-md-4">
+                                                <input type="text" placeholder="" class="form-control" name="card_cvc">
+														<span class="help-block">
+														</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Expiration(MM/YYYY) <span
+                                                    class="required" aria-required="true">
+													* </span>
+                                            </label>
+                                            <div class="col-md-4">
+                                                <input type="text" placeholder="MM/YYYY" maxlength="7"
+                                                       class="form-control" name="card_expiry_date">
+														<span class="help-block">
+														e.g 11/2020 </span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Payment Options <span class="required"
+                                                                                                        aria-required="true">
+													* </span>
+                                            </label>
+                                            <div class="col-md-4">
+                                                <div class="checkbox-list">
+                                                    <label>
+                                                        <div class="checker"><span><input type="checkbox"
+                                                                                          name="payment[]" value="1"
+                                                                                          data-title="Auto-Pay with this Credit Card."></span>
+                                                        </div>
+                                                        Auto-Pay with this Credit Card </label>
+                                                    <label>
+                                                        <div class="checker"><span><input type="checkbox"
+                                                                                          name="payment[]" value="2"
+                                                                                          data-title="Email me monthly billing."></span>
+                                                        </div>
+                                                        Email me monthly billing </label>
+                                                </div>
+                                                <div id="form_payment_error">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="tab4">
+                                        <h3 class="block">Confirm your account</h3>
+                                        <h4 class="form-section">Account</h4>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Username:</label>
+                                            <div class="col-md-4">
+                                                <p class="form-control-static" data-display="username">
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Email:</label>
+                                            <div class="col-md-4">
+                                                <p class="form-control-static" data-display="email">
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <h4 class="form-section">Profile</h4>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Fullname:</label>
+                                            <div class="col-md-4">
+                                                <p class="form-control-static" data-display="fullname">
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Gender:</label>
+                                            <div class="col-md-4">
+                                                <p class="form-control-static" data-display="gender">
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Phone:</label>
+                                            <div class="col-md-4">
+                                                <p class="form-control-static" data-display="phone">
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Address:</label>
+                                            <div class="col-md-4">
+                                                <p class="form-control-static" data-display="address">
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">City/Town:</label>
+                                            <div class="col-md-4">
+                                                <p class="form-control-static" data-display="city">
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Country:</label>
+                                            <div class="col-md-4">
+                                                <p class="form-control-static" data-display="country">
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Remarks:</label>
+                                            <div class="col-md-4">
+                                                <p class="form-control-static" data-display="remarks">
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <h4 class="form-section">Billing</h4>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Card Holder Name:</label>
+                                            <div class="col-md-4">
+                                                <p class="form-control-static" data-display="card_name">
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Card Number:</label>
+                                            <div class="col-md-4">
+                                                <p class="form-control-static" data-display="card_number">
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">CVC:</label>
+                                            <div class="col-md-4">
+                                                <p class="form-control-static" data-display="card_cvc">
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Expiration:</label>
+                                            <div class="col-md-4">
+                                                <p class="form-control-static" data-display="card_expiry_date">
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Payment Options:</label>
+                                            <div class="col-md-4">
+                                                <p class="form-control-static" data-display="payment[]">
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-actions">
+                                <div class="row">
+                                    <div class="col-md-offset-3 col-md-9">
+                                        <a href="javascript:;" class="btn default button-previous disabled"
+                                           style="display: none;">
+                                            <i class="m-icon-swapleft"></i> Back </a>
+                                        <a href="javascript:;" class="btn blue button-next">
+                                            Continue <i class="m-icon-swapright m-icon-white"></i>
+                                        </a>
+                                        <a href="javascript:;" class="btn green button-submit" style="display: none;">
+                                            Submit <i class="m-icon-swapright m-icon-white"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}

@@ -23,9 +23,13 @@ class MongodbUtil(object):
             'address': address,
             'username': username,
             'password': password,
+            # 新注册的用户使用默认头像，以后可以修改
+            'header_img': '/admin/admin/static/metronic/admin/layout/img/avatar3_small.jpg',
             'create_date': datetime.datetime.now()
         }
         self.db['dt_user'].insert(doc)
+
+mongodb = MongodbUtil()
 
 
 if __name__ == '__main__':
