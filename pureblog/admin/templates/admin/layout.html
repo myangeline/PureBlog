@@ -64,7 +64,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <div class="page-header-inner">
         <!-- BEGIN LOGO -->
         <div class="page-logo">
-            <a href="/admin">
+            <a href="{{ url_for('admin.index') }}">
                 <img src="{{ url_for('admin.static', filename='metronic/admin/layout/img/logo.png') }}" alt="logo"
                      class="logo-default"/>
             </a>
@@ -194,7 +194,7 @@ License: You must have a valid license purchased only from themeforest(the above
                             <a href="#"><i class="fa fa-angle-double-right"></i>文章类别</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-angle-double-right"></i>文章创作</a>
+                            <a href="{{ url_for('admin.posts_write') }}"><i class="fa fa-angle-double-right"></i>文章创作</a>
                         </li>
                     </ul>
                 </li>
