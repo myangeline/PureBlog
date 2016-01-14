@@ -75,3 +75,11 @@ def posts_write():
     :return:
     """
     return render_template('admin/posts_write.html')
+
+
+@admin.route('/posts/upload', methods=['POST'])
+@login_required
+def upload_file():
+    file = request.files['posts_file']
+    print(file)
+    return 'hello'

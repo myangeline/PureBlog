@@ -18,6 +18,9 @@ def md5(message, encoding='utf-8'):
     return m.hexdigest()
 
 
+# def md5_file()
+
+
 if __name__ == '__main__':
     print(md5('abc'))
     pass

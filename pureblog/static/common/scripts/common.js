@@ -30,5 +30,6 @@ var Common = {
 
 var Website = {
     login: "/admin/login",
-    register: '/admin/register'
+    register: '/admin/register',
+    upload_file: '/admin/posts/upload'
 };
