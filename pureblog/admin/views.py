@@ -1,4 +1,6 @@
-from flask import render_template, request, jsonify, session, redirect, url_for, Blueprint
+import os
+
+from flask import render_template, request, jsonify, session, redirect, url_for, Blueprint, current_app
 
 from pureblog.admin.wtfform import LoginForm, RegisterForm, ForgetForm
 from pureblog.instance.config import LOGIN_USERNAME, LOGIN_USER_HEADER_IMAGE
@@ -81,5 +83,5 @@ def posts_write():
 @login_required
 def upload_file():
     file = request.files['posts_file']
-    print(file)
+    file.save(os.path.join(current_app.config['UPLOAD_FOLDER'], file.filename))
     return 'hello'
