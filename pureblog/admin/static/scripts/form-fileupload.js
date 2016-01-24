@@ -27,10 +27,9 @@ var FormFileUpload = function () {
                             '<span class="btn-upload">上传</span> </button></span>';
                         $(".upload-file-area").remove();
                         $('.fileinput-button').after(html);
-                        var $title = $("input[name='title']");
-                        if ($title.val() === '') {
-                            $title.val(name.substring(0, name.length-3));
-                        }
+                        var posts_name = name.substring(0, name.length-3);
+                        $("input[name='title']").val(posts_name);
+                        $(".posts-name").val(posts_name);
                     }
                 }
             });
@@ -49,6 +48,7 @@ var FormFileUpload = function () {
                     var xhr = new XMLHttpRequest();
                     xhr.open("post", Website.upload_file, true);
                     xhr.onload = function () {
+                        $(".start").attr('disabled', true);
                         alert("上传完成!");
                     };
 

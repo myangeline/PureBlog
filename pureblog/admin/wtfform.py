@@ -24,3 +24,6 @@ class RegisterForm(Form):
 class ForgetForm(Form):
     email = EmailField('Email', validators=[DataRequired('Email不可为空'), Email('Email格式错误')])
 
+
+class CategoryForm(Form):
+    category_name = StringField("类别名称", validators=[DataRequired('类别名称不可为空')])

@@ -210,7 +210,6 @@ var Login = function () {
             submitHandler: function (form) {
                 $('#register-submit-btn').addClass('disabled');
                 Common.ajaxPost(Website.register, $(form).serializeArray(), function (data) {
-                    console.log(data);
                     $('#register-submit-btn').removeClass('disabled');
                     if (data.code === 0) {
                         location.href = data.data;

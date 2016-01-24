@@ -31,5 +31,9 @@ var Common = {
 var Website = {
     login: "/admin/login",
     register: '/admin/register',
-    upload_file: '/admin/posts/upload'
+    upload_file: '/admin/posts/upload',
+    category_list: '/admin/category/list',
+    category_update: '/admin/category/update',
+    category_delete: '/admin/category/delete',
+
 };

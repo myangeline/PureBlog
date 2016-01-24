@@ -193,10 +193,23 @@ License: You must have a valid license purchased only from themeforest(the above
                             <a href="#"><i class="fa fa-angle-double-right"></i>文章列表</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-angle-double-right"></i>文章类别</a>
+                            <a href="{{ url_for('admin.posts_write') }}"><i class="fa fa-angle-double-right"></i>文章创作</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="javascript:;">
+                        <i class="icon-film"></i>
+                        <span class="title">类别管理</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li>
+                            <a href="{{ url_for('admin.category_list') }}"><i class="fa fa-angle-double-right"></i>类别列表</a>
                         </li>
                         <li>
-                            <a href="{{ url_for('admin.posts_write') }}"><i class="fa fa-angle-double-right"></i>文章创作</a>
+                            <a href="{{ url_for('admin.category_add') }}"><i class="fa fa-angle-double-right"></i>类别添加</a>
                         </li>
                     </ul>
                 </li>

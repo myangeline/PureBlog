@@ -2,8 +2,8 @@ import os
 
 from flask import render_template, request, jsonify, session, redirect, url_for, Blueprint, current_app
 
-from pureblog.admin.wtfform import LoginForm, RegisterForm, ForgetForm
-from pureblog.instance.config import LOGIN_USERNAME, LOGIN_USER_HEADER_IMAGE
+from pureblog.admin.wtfform import LoginForm, RegisterForm, ForgetForm, CategoryForm
+from pureblog.instance.config import LOGIN_USERNAME, LOGIN_USER_HEADER_IMAGE, LOGIN_USER_ID
 from pureblog.utils.convertutil import convert_str2int
 from pureblog.utils.decoratorutil import login_required
 from pureblog.utils.encryptutil import md5
@@ -32,6 +32,7 @@ def login():
             if user:
                 if user['password'] == md5(form.password.data):
                     # session保存登录用户名和头像
+                    session[LOGIN_USER_ID] = str(user['_id'])
                     session[LOGIN_USERNAME] = form.username.data
                     session[LOGIN_USER_HEADER_IMAGE] = user['header_img']
                     return jsonify(ok('/admin/'))
@@ -83,5 +84,64 @@ def posts_write():
 @login_required
 def upload_file():
     file = request.files['posts_file']
-    file.save(os.path.join(current_app.config['UPLOAD_FOLDER'], file.filename))
+    upload_folder = current_app.config['UPLOAD_FOLDER']
+    if not os.path.exists(upload_folder):
+        os.mkdir(upload_folder)
+    file.save(os.path.join(upload_folder, file.filename))
     return 'hello'
+
+
+# #####################类别管理###########################
+
+@admin.route('/category/add', methods=['GET', 'POST'])
+@login_required
+def category_add():
+    if request.method == 'POST':
+        pass
+    return render_template('admin/category_add.html')
+
+
+@admin.route('/category/list', methods=['GET', 'POST'])
+@login_required
+def category_list():
+    form = CategoryForm(request.values)
+    user_id = session[LOGIN_USER_ID]
+    if request.method == 'POST':
+        if form.validate_on_submit():
+            mongodb.add_category(user_id, form.data['category_name'])
+            return jsonify(ok('保存成功'))
+        else:
+            return jsonify(error(40001))
+    categories = mongodb.get_categories(user_id)
+    return render_template('admin/category_list.html',
+                           form=form, categories=categories)
+
+
+@admin.route('/category/update', methods=['POST'])
+@login_required
+def category_update():
+    category_id = request.values.get('category_id', None)
+    category_name = request.values.get('category_name', None)
+    if category_id and category_name:
+        user_id = session[LOGIN_USER_ID]
+        category = mongodb.get_categories(user_id, category_id)
+        if not category:
+            return jsonify(error(40003))
+        if category and category_name != category['name']:
+            mongodb.update_category(category_id, category_name)
+            return jsonify(ok('修改成功'))
+        else:
+            return jsonify(error(40002))
+    else:
+        return jsonify(error(30007))
+
+
+@admin.route('/category/delete', methods=['POST'])
+@login_required
+def category_delete():
+    category_id = request.values.get('category_id', None)
+    if category_id:
+        mongodb.delete_category(category_id)
+        return jsonify(ok('删除成功'))
+    else:
+        return jsonify(error(30007))
