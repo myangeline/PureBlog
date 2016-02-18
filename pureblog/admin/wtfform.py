@@ -1,5 +1,5 @@
 from flask.ext.wtf import Form
-from wtforms import StringField, PasswordField, BooleanField
+from wtforms import StringField, PasswordField, BooleanField, IntegerField
 from wtforms.fields.html5 import EmailField
 from wtforms.validators import DataRequired, Email, EqualTo
 
@@ -27,3 +27,11 @@ class ForgetForm(Form):
 
 class CategoryForm(Form):
     category_name = StringField("类别名称", validators=[DataRequired('类别名称不可为空')])
+
+
+class PostsForm(Form):
+    title = StringField("标题", validators=[DataRequired('标题不可为空')])
+    summary = StringField("摘要", validators=[DataRequired('摘要不可为空')])
+    posts_category = StringField("类别", validators=[DataRequired('类别不可为空')])
+    posts_name = StringField("文件名", validators=[DataRequired('文件名不可为空')])
+    is_public = IntegerField("是否发布", validators=[DataRequired('是否发布不可为空')])

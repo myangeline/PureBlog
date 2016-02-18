@@ -35,5 +35,6 @@ var Website = {
     category_list: '/admin/category/list',
     category_update: '/admin/category/update',
     category_delete: '/admin/category/delete',
-
+    posts_write: '/admin/posts/write',
+    posts_list: '/admin/posts/list'
 };

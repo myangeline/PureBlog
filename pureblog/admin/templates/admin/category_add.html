@@ -1,6 +1,10 @@
 {% extends 'admin/layout.html' %}
 {% block style %}
-
+<style>
+    .help-inline {
+        color: #F3565D;
+    }
+</style>
 {% endblock %}
 
 {% block page_title %}类别管理{% endblock %}
@@ -17,9 +21,73 @@
 {% endblock %}
 
 {% block content %}
+<div class="row">
+        <div class="col-md-12 ">
+            <!-- BEGIN SAMPLE FORM PORTLET-->
+            <div class="portlet box blue-hoki">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-gift"></i> 类别添加
+                    </div>
+                    <div class="tools">
+                        <a href="" class="reload" data-original-title="" title=""></a>
+                    </div>
+                </div>
+                <div class="portlet-body form">
+                    <form id="form-category-add" action="{{ url_for('admin.category_add') }}" class="form-horizontal"
+                          role="form" method="post">
+                        {{ form.csrf_token }}
+                        <div class="form-body">
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">类别名称：</label>
+                                <div class="col-md-9">
+                                    <input type="text" name="category_name" autocomplete="off"
+                                           class="form-control input-inline input-medium" placeholder="类别名称">
+                                    <span class="help-inline"></span>
+                                </div>
+                            </div>
 
+                        </div>
+                        <div class="form-actions">
+                            <div class="row">
+                                <div class="col-md-offset-3 col-md-9">
+                                    <button type="button" class="btn green btn-save">提&nbsp;&nbsp;交</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- END SAMPLE FORM PORTLET-->
+        </div>
+    </div>
 {% endblock %}
 
 {% block scripts %}
-
+    <script>
+        $(function(){
+            $(".btn-save").click(function(){
+                var category_name = $("input[name='category_name']").val();
+                if (category_name === "") {
+                    $('.help-inline').text('类别名称不可为空');
+                    return false;
+                } else {
+                    // 需要先判断类别名称是否重复
+                    $('.help-inline').text('');
+                }
+                var $form_category_add = $("#form-category-add");
+                var action = $form_category_add.attr('action');
+                var data = $form_category_add.serializeArray();
+                Common.ajaxPost(action, data, function(data){
+                    if(data.code === 0){
+                        Common.notify('success', data.data, '');
+                        window.location.reload();
+                    }else{
+                        Common.notify('error', data.error, '');
+                        $('.help-inline').text(data.error);
+                    }
+                });
+            });
+        });
+    </script>
 {% endblock %}

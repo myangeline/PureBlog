@@ -2,7 +2,7 @@ import os
 
 from flask import render_template, request, jsonify, session, redirect, url_for, Blueprint, current_app
 
-from pureblog.admin.wtfform import LoginForm, RegisterForm, ForgetForm, CategoryForm
+from pureblog.admin.wtfform import LoginForm, RegisterForm, ForgetForm, CategoryForm, PostsForm
 from pureblog.instance.config import LOGIN_USERNAME, LOGIN_USER_HEADER_IMAGE, LOGIN_USER_ID
 from pureblog.utils.convertutil import convert_str2int
 from pureblog.utils.decoratorutil import login_required
@@ -70,14 +70,28 @@ def logout():
 
 # #####################博客管理###########################
 
-@admin.route('/posts/write')
+@admin.route('/posts/write', methods=['GET', 'POST'])
 @login_required
 def posts_write():
     """
     博客创作
     :return:
     """
-    return render_template('admin/posts_write.html')
+    # todo 这里的文章保存验证有问题，现在先不管了
+    user_id = session[LOGIN_USER_ID]
+    form = PostsForm(request.form)
+    if request.method == 'POST':
+
+        return jsonify(ok('保存成功'))
+
+    categories = mongodb.get_categories(user_id)
+    return render_template('admin/posts_write.html', **locals())
+
+
+@admin.route('/posts/list')
+@login_required
+def posts_list():
+    pass
 
 
 @admin.route('/posts/upload', methods=['POST'])
@@ -96,9 +110,15 @@ def upload_file():
 @admin.route('/category/add', methods=['GET', 'POST'])
 @login_required
 def category_add():
+    form = CategoryForm(request.values)
     if request.method == 'POST':
-        pass
-    return render_template('admin/category_add.html')
+        if form.validate_on_submit():
+            user_id = session[LOGIN_USER_ID]
+            mongodb.add_category(user_id, form.data['category_name'])
+            return jsonify(ok('保存成功'))
+        else:
+            return jsonify(error(40001))
+    return render_template('admin/category_add.html', form=form)
 
 
 @admin.route('/category/list', methods=['GET', 'POST'])
